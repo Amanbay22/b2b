@@ -160,7 +160,7 @@ public class TransactionController {
     }
 
 
-    @GetMapping("/statuses")
+    @GetMapping("/statusesByDate")
     public MappingJacksonValue getStatusCounts(@RequestParam("start")
                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
                                                @RequestParam("end")
