@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="company")
@@ -15,6 +16,7 @@ import javax.persistence.*;
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "company_id")
     private Long id;
 
     private String name;
@@ -24,5 +26,8 @@ public class Company {
 
     @OneToOne
     private Card card;
+
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    private List<Employees> employees;
 
 }

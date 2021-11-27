@@ -1,4 +1,4 @@
-package kz.miskarisa.b2b.entity;
+package kz.miskarisa.b2b.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

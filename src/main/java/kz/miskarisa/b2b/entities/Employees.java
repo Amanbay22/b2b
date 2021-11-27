@@ -1,4 +1,4 @@
-package kz.miskarisa.b2b.entity;
+package kz.miskarisa.b2b.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -13,10 +13,12 @@ public class Employees {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_id")
     private Long id;
 
-
-    private Company companyId;
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
     private String firstName;
     private String lastName;
     private String phoneNumber;
