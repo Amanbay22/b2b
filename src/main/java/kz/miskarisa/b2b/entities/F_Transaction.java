@@ -30,6 +30,9 @@ public class F_Transaction {
     @JoinColumn(name="status_id")
     private Status status;
 
+    private Long companyId;
+    private Long companyRecieverId;
+
     @OneToOne(mappedBy = "f_transaction", cascade = CascadeType.ALL)
     private L_Transaction l_transaction;
 }
