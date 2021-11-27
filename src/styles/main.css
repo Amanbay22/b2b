@@ -55,6 +55,18 @@ footer {
     margin: 15% 0% 20% 0%;
 }
 
+.metric-wrapper {
+    width: 50% !important;
+}
+
+.transaction-info {
+    font-size: calc(1vw + 1em);
+}
+
+.transaction-metric {
+    font-size: calc(1vw + 1em);
+}
+
 .main-content-chart {
     padding: 5%;
 }
