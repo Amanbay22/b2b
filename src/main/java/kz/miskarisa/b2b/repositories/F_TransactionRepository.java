@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface F_TransactionRepository extends JpaRepository<F_Transaction, Long> {
     List<F_Transaction> findAllByDateTimeBetween(LocalDate start, LocalDate end);
-    List<F_Transaction> findAllByCompanyIdAndCompanyRecieverId(Long id, Long id1);
+    List<F_Transaction> findByCompanyIdAndCompanyRecieverId(Long id, Long id1);
 }
