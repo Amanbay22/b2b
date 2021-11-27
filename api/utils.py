@@ -6,6 +6,12 @@ import pandas
 import base64
 
 
+def toBinary(fileUrl):
+    with open(fileUrl, 'rb') as f:
+        binaryString = base64.b64encode(f.read())
+    return binaryString
+
+
 def getResponse(url):
     return requests.get(url).json()
 
