@@ -51,8 +51,32 @@ footer {
     padding-top: 10% !important;
 }
 
-.montserrat-bold {}
-
 .navbar-header {
     margin: 15% 0% 20% 0%;
+}
+
+.main-content-chart {
+    padding: 5%;
+}
+
+.main-content-transactions {
+    padding: 5%;
+    padding-top: 0%;
+}
+
+.chart-image {
+    margin-top: 5%;
+    width: 90%;
+}
+
+.date-field {
+    border: none;
+    outline: none;
+    background-color: rgb(223, 223, 223);
+    border-radius: 5px;
+    padding-bottom: 0.4%;
+}
+
+.date-field:focus {
+    outline: none;
 }

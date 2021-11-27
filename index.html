@@ -37,10 +37,62 @@
             <p class="navbar-element fat-font"><i class="material-icons">insert_chart</i>Аналитика</p>
         </div>
     </ul>
-
+    <main>
+        <div class="main-content-chart">
+            <h4 class="fat-font">Статистика за выбранный период</h4>
+            С:
+            <input type="date" name="from-date" id="" class="date-field browser-default datepicker"> По:
+            <input type="date" name="to-date" id="" class="date-field browser-default datepicker">
+            <hr>
+            <img src="src/images/graph-example.png" alt="" class="chart-image">
+        </div>
+        <div class="main-content-transactions">
+            <h4 class="fat-font">Статистика за выбранный период</h4>
+            <hr>
+            <table>
+                <tr>
+                    <th>Transaction id</th>
+                    <th>Product</th>
+                    <th>Number of products</th>
+                    <th>Amount</th>
+                    <th>Sender</th>
+                    <th>Date</th>
+                    <th>Transaction status</th>
+                </tr>
+                <tr>
+                    <td>#1</td>
+                    <td>Avance</td>
+                    <td>1</td>
+                    <td>500000$</td>
+                    <td>Alexander Lee #123</td>
+                    <td>27/11/21</td>
+                    <td class="amber lighten-2">Charged</td>
+                </tr>
+                <tr>
+                    <td>#2</td>
+                    <td>Test</td>
+                    <td>2</td>
+                    <td>228$</td>
+                    <td>Test User #0</td>
+                    <td>27/11/21</td>
+                    <td class="green lighten-2">Success</td>
+                </tr>
+                <tr>
+                    <td>#3</td>
+                    <td>Test</td>
+                    <td>3</td>
+                    <td>100$</td>
+                    <td>Admin #1337</td>
+                    <td>27/11/21</td>
+                    <td class="red lighten-2">Cancelled</td>
+                </tr>
+            </table>
+        </div>
+    </main>
 
     <div class="main-block"></div>
     <script src="src/scripts/materialize.js"></script>
+    <script src="src/scripts/datepicker.js"></script>
     <script src="src/scripts/sidenav.js"></script>
 </body>
 
