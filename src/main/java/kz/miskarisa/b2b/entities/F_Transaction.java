@@ -1,6 +1,7 @@
 package kz.miskarisa.b2b.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "f_transaction")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class F_Transaction {
