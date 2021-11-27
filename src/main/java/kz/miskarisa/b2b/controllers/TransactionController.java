@@ -6,25 +6,25 @@ import kz.miskarisa.b2b.entities.Status;
 import kz.miskarisa.b2b.repositories.CompanyRepository;
 import kz.miskarisa.b2b.repositories.F_TransactionRepository;
 import kz.miskarisa.b2b.repositories.L_TransactionRepository;
+import kz.miskarisa.b2b.repositories.StatusRepository;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("transaction")
 public class TransactionController {
     private F_TransactionRepository f_transactionRepository;
     private CompanyRepository companyRepository;
+    private StatusRepository statusRepository;
 
-    public TransactionController(F_TransactionRepository f_transactionRepository, CompanyRepository companyRepository) {
+    public TransactionController(F_TransactionRepository f_transactionRepository, CompanyRepository companyRepository, StatusRepository statusRepository) {
         this.f_transactionRepository = f_transactionRepository;
         this.companyRepository = companyRepository;
+        this.statusRepository = statusRepository;
     }
 
     @GetMapping("/all")
@@ -158,4 +158,26 @@ public class TransactionController {
 
         return new MappingJacksonValue(listMap);
     }
+
+
+    @GetMapping("/statuses")
+    public MappingJacksonValue getStatusCounts(){
+        List<Status> statuses = statusRepository.findAll();
+        List<Map<String, Object>> listMap = new ArrayList<>();
+        for (Status s : statuses){
+            Map<String, Object> arr = new HashMap<>();
+
+            List<F_Transaction> transactions = f_transactionRepository.findF_TransactionByStatus(s);
+            if (transactions.size() > 0){
+                arr.put("status", s.getName());
+                List<Map<String, Object>> newMap = new ArrayList<>();
+                arr.put("count", transactions.size());
+                listMap.add(arr);
+            }
+        }
+
+
+        return new MappingJacksonValue(listMap);
+    }
+
 }
