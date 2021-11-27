@@ -20,7 +20,8 @@ public class Card {
     private String cardMask;
     private String cardType;
 
-    @OneToOne(mappedBy = "card")
+    @ManyToOne
+    @JoinColumn(name = "company_id")
     private Company company;
 
     @OneToOne(mappedBy = "card")
