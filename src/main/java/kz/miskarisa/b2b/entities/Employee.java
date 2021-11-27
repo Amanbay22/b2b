@@ -1,6 +1,7 @@
 package kz.miskarisa.b2b.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "employees")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
