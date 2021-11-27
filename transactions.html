@@ -40,7 +40,7 @@
     </ul>
     <main>
         <div class="main-content-chart">
-            <button class="btn btn-teal waves-light waves-effect">Создать платёж</button>
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Создать платёж</a>
             <h5 class="fat-font">Список последних транзакций с компаниями-партнерами:</h5>
             <input type="text" name="" id="" placeholder="A - Z" class="filtering-input">
             <table>
@@ -71,10 +71,43 @@
             </table>
         </div>
     </main>
-
+    <div id="modal1" class="modal">
+        <div class="container">
+            <h6>Банковская операция #1236</h6>
+            <div class="payment-block center-align">
+                <h5 class="green-text">Заполните поля ниже</h5>
+                <div class="row">
+                    <div class="col s6">
+                        <label for="">Сумма</label>
+                        <input type="text" name="amount" id="" placeholder="К примеру: 500$">
+                    </div>
+                    <div class="col s6">
+                        <label for="">Номер карты получателя</label>
+                        <input type="text" name="cardnumber" id="" placeholder="1234 5678 9101 1121">
+                    </div>
+                    <div class="col s12 input-field">
+                        <select class="custom-select-field">
+                            <option value="" disabled selected>Выберите, с какой карты будут сняты средства</option>
+                            <option value="1">Номер карты №1</option>
+                            <option value="2">Номер карты №2</option>
+                            <option value="3">Номер карты №3</option>
+                        </select>
+                        <label>Метод оплаты</label>
+                    </div>
+                    <div class="col s12">
+                        <label for="">Комментарий к платежу</label>
+                        <input type="text" name="comment" id="" placeholder="Платёж за поставку товара">
+                    </div>
+                    <button class="waves-effect waves-light btn">Совершить платёж</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="main-block"></div>
     <script src="src/scripts/materialize.js"></script>
     <script src="src/scripts/sidenav.js"></script>
+    <script src="src/scripts/select.js"></script>
+    <script src="src/scripts/modal.js"></script>
 </body>
 
 </html>
