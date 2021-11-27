@@ -7,10 +7,10 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "f_transactions")
+@Table(name = "f_transaction")
 @NoArgsConstructor
 @AllArgsConstructor
-public class F_Transactions {
+public class F_Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,11 @@ public class F_Transactions {
     private String currency;
     private float money;
     private LocalDate dateTime;
-    private T_Reason reason_id;
-    private T_Status statud_id;
+    @ManyToOne
+    private Reason reason;
+    @ManyToOne
+    private Status status;
+
+    @OneToOne
+    private L_Transaction l_transactions;
 }

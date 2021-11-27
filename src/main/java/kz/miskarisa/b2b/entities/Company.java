@@ -3,7 +3,6 @@ package kz.miskarisa.b2b.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,6 +27,6 @@ public class Company {
     private Card card;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    private List<Employees> employees;
+    private List<Employee> employees;
 
 }

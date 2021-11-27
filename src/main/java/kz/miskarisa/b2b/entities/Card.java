@@ -22,4 +22,7 @@ public class Card {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Company company;
+
+    @OneToOne
+    private L_Transaction l_transactions;
 }

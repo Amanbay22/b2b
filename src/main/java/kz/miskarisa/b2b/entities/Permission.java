@@ -3,8 +3,8 @@ package kz.miskarisa.b2b.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name="permissions")
-public class Permissions {
+@Table(name="permission")
+public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

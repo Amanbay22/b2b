@@ -4,12 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employees")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Employees {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,12 +18,14 @@ public class Employees {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "company_id")
     private Company company;
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private Role roleId;
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<L_Transaction> l_transactions;
 
 
 }

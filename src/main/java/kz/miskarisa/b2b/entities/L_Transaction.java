@@ -6,16 +6,19 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "l_transactions")
+@Table(name = "l_transaction")
 @NoArgsConstructor
 @AllArgsConstructor
-public class L_Transactions {
+public class L_Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Employees employee_id;
-    private F_Transactions transaction_id;
-    private Card card_id;
+    @ManyToOne
+    private Employee employee;
+    @OneToOne
+    private F_Transaction transaction;
+    @OneToOne
+    private Card card;
 
 }
