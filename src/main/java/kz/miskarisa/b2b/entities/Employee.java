@@ -18,6 +18,7 @@ public class Employee {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "company_id")
     private Company company;
     private String firstName;
     private String lastName;
@@ -26,6 +27,5 @@ public class Employee {
     private Role role;
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<L_Transaction> l_transactions;
-
 
 }

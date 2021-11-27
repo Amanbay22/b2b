@@ -20,9 +20,9 @@ public class Card {
     private String cardMask;
     private String cardType;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "card")
     private Company company;
 
-    @OneToOne
+    @OneToOne(mappedBy = "card")
     private L_Transaction l_transactions;
 }

@@ -23,7 +23,7 @@ public class Company {
     private String phone;
     private String address;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Card card;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)

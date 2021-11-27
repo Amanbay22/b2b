@@ -21,10 +21,13 @@ public class F_Transaction {
     private float money;
     private LocalDate dateTime;
     @ManyToOne
+    @JoinColumn(name="reason_id")
     private Reason reason;
     @ManyToOne
+    @JoinColumn(name="status_id")
     private Status status;
 
-    @OneToOne
-    private L_Transaction l_transactions;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="l_transaction_id")
+    private L_Transaction l_transaction;
 }
