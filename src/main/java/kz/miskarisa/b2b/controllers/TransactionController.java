@@ -161,13 +161,16 @@ public class TransactionController {
 
 
     @GetMapping("/statuses")
-    public MappingJacksonValue getStatusCounts(){
+    public MappingJacksonValue getStatusCounts(@RequestParam("start")
+                                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
+                                               @RequestParam("end")
+                                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end){
         List<Status> statuses = statusRepository.findAll();
         List<Map<String, Object>> listMap = new ArrayList<>();
         for (Status s : statuses){
             Map<String, Object> arr = new HashMap<>();
 
-            List<F_Transaction> transactions = f_transactionRepository.findF_TransactionByStatus(s);
+            List<F_Transaction> transactions = f_transactionRepository.findF_TransactionByStatusAndDateTimeBetween(s, start, end);
             if (transactions.size() > 0){
                 arr.put("status", s.getName());
                 List<Map<String, Object>> newMap = new ArrayList<>();
