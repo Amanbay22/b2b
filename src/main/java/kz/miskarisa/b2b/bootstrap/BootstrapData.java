@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@Component
+//@Component
 public class BootstrapData implements CommandLineRunner {
 
     @Autowired
@@ -56,7 +56,7 @@ public class BootstrapData implements CommandLineRunner {
 //        failed.setDescription("BECAUSE I DECIDED");
 //        reasonRepository.save(success1);
 //        reasonRepository.save(failed);
-
+//
 //        Company company1 = new Company();
 //        company1.setName("RyanGoslingInc");
 //        company1.setBin("123456789012");
@@ -95,8 +95,8 @@ public class BootstrapData implements CommandLineRunner {
 //        l_transaction.setEmployee(employee);
 //        lTransactionRepository.save(l_transaction);
 
-        Reason reason = reasonRepository.getById(1L);
-        Status status = statusRepository.getById(2L);
+//        Reason reason = reasonRepository.getById(1L);
+//        Status status = statusRepository.getById(2L);
 //        F_Transaction f_transaction = new F_Transaction();
 //        f_transaction.setDescription("Sanya jivotnoe");
 //        f_transaction.setCurrency("KZT");
@@ -106,19 +106,39 @@ public class BootstrapData implements CommandLineRunner {
 //        f_transaction.setStatus(status);
 //        fTransactionRepository.save(f_transaction);
 
-        float min = 400;
-        float max = 100000;
-        for (int i = 1; i < 20; i++){
-            F_Transaction f_transaction = new F_Transaction();
-            f_transaction.setDescription("kek");
-            f_transaction.setCurrency("KZT");
-            Random random = new Random();
-            float ourMoney =  min + random.nextFloat() * (max - min);
-            f_transaction.setMoney(ourMoney);
-            f_transaction.setDateTime(LocalDate.now());
-            f_transaction.setReason(reason);
-            f_transaction.setStatus(status);
-            fTransactionRepository.save(f_transaction);
-        }
+//        float min = 400;
+//        float max = 100000;
+//        for (int i = 1; i < 20; i++){
+//            F_Transaction f_transaction = new F_Transaction();
+//            f_transaction.setDescription("kek");
+//            f_transaction.setCurrency("KZT");
+//            Random random = new Random();
+//            float ourMoney =  min + random.nextFloat() * (max - min);
+//            f_transaction.setMoney(ourMoney);
+//            f_transaction.setDateTime(LocalDate.now());
+//            f_transaction.setReason(reason);
+//            f_transaction.setStatus(status);
+//            fTransactionRepository.save(f_transaction);
+//        }
+
+//        Card card = cardRepository.getById(1L);
+//        Employee employee = employeeRepository.getById(1L);
+//        for (int i = 7; i <= 25; i++){
+//            L_Transaction l_transaction = new L_Transaction();
+//            F_Transaction f_transaction = fTransactionRepository.getById(Long.valueOf(i));
+//            l_transaction.setCard(card);
+//            l_transaction.setEmployee(employee);
+//            l_transaction.setF_transaction(f_transaction);
+//            lTransactionRepository.save(l_transaction);
+//        }
+
+//        List<F_Transaction> transactionList = fTransactionRepository.findAll();
+//        Company company = companyRepository.getById(2L);
+//        for (F_Transaction t : transactionList){
+//            t.setCompanyId(1L);
+//            t.setCompanyRecieverId(2L);
+//            fTransactionRepository.save(t);
+//            fTransactionRepository.save(transactionList);
+//        }
     }
 }
