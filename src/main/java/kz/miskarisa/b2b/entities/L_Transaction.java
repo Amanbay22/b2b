@@ -21,8 +21,9 @@ public class L_Transaction {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @OneToOne(mappedBy = "l_transaction")
-    private F_Transaction transaction;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="f_transaction_id")
+    private F_Transaction f_transaction;
 
     @OneToOne
     @JoinColumn(name = "card_id")

@@ -20,6 +20,7 @@ public class Card {
 
     private String cardMask;
     private String cardType;
+    private Long balance;
 
     @ManyToOne
     @JoinColumn(name = "company_id")

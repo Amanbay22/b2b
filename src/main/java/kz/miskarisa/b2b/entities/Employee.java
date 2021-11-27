@@ -27,7 +27,7 @@ public class Employee {
     private String phoneNumber;
     @Enumerated(value = EnumType.STRING)
     private Role role;
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<L_Transaction> l_transactions;
 
 }
