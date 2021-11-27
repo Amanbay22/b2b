@@ -6,6 +6,19 @@ import pandas
 import base64
 
 
+def writeToDatabase(collection, data):
+    collection.insert_many([data])
+
+
+def getDatabase():
+    from pymongo import MongoClient
+    import pymongo
+    CONNECTION_STRING = "mongodb+srv://stage:stage@mongodb.jrd7u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    from pymongo import MongoClient
+    client = MongoClient(CONNECTION_STRING)
+    return client['BTOB']
+
+
 def toBinary(fileUrl):
     with open(fileUrl, 'rb') as f:
         binaryString = base64.b64encode(f.read())
@@ -22,7 +35,7 @@ def drawAndSavePieChart(uniqueValue, data):
     for value in uniqueValues:
         piechartData[value] = len(data.loc[data[uniqueValue] == value])
     plt.figure(figsize=(7, 7))
-    colors = sns.color_palette('pastel')[0:len(uniqueValues)]
+    colors = sns.color_palette('pastel')[0: len(uniqueValues)]
     plt.pie(piechartData.values(), labels=uniqueValues,
             colors=colors, autopct='%.0f%%')
     plt.savefig('pieplot.png')

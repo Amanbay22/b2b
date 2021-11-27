@@ -21,4 +21,5 @@ from . import views
 urlpatterns = [
     path("sortByMonth", views.sortByMonth),
     path("sortByDay", views.sortByDay),
+    path("mongoTest", views.mongoConnect)
 ]

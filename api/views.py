@@ -1,9 +1,13 @@
+from operator import ge
 from django.http import response
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 
 import asyncio
 from .utils import *
+
+dbname = getDatabase()
+collection = dbname["lastResults"]
 
 
 def sortByMonth(request):
@@ -33,7 +37,11 @@ def sortByMonth(request):
     pieString = drawAndSavePieChart('companyName', df2)
     df.to_csv("output.csv", index=False)
     csvString = toBinary("output.csv")
-    return JsonResponse(jsonData, safe=False)
+    data = {}
+    data['barString'] = str(barString)
+    data['pieString'] = str(pieString)
+    data['csvString'] = str(csvString)
+    return JsonResponse(data)
 
 
 def sortByDay(request):
@@ -50,4 +58,14 @@ def sortByDay(request):
     pieString = drawAndSavePieChart('companyName', df2)
     df.to_csv("output.csv", index=False)
     csvString = toBinary("output.csv")
-    return JsonResponse(jsonData2, safe=False)
+    data = {}
+    data['barString'] = str(barString)
+    data['pieString'] = str(pieString)
+    data['csvString'] = str(csvString)
+    return JsonResponse(data)
+
+# writeToDatabase(collection, data)
+
+
+def mongoConnect(request):
+    return HttpResponse("Hello world")

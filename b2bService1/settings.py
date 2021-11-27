@@ -24,8 +24,14 @@ SECRET_KEY = 'django-insecure-)(y@=fzo6d(asa2fyo^dl%qjw#ns4^4_o-0s^7r9aok6#qsq1i
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+CORS_ORIGIN_ALLOW_ALL = DEBUG
+# CORS_ORIGIN_ALLOW_ALL = DEBUG
 
-ALLOWED_HOSTS = ['0.0.0.0', "192.168.0.103"]
+ALLOWED_HOSTS = ['0.0.0.0', "192.168.0.100"]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://192.168.0.110:4444',
+]
 
 
 # Application definition
@@ -37,17 +43,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api'
+    'api',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'b2bService1.urls'
