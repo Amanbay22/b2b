@@ -18,7 +18,7 @@ public class Reason {
     @Column(name = "reason_id")
     private Long id;
 
-    @OneToMany(mappedBy = "reason")
+    @OneToMany(mappedBy = "reason", fetch = FetchType.EAGER)
     private List<F_Transaction> f_transactions;
 
     private String description;

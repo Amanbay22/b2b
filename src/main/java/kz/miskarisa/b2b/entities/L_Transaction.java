@@ -25,6 +25,7 @@ public class L_Transaction {
     private F_Transaction transaction;
 
     @OneToOne
+    @JoinColumn(name = "card_id")
     private Card card;
 
 }

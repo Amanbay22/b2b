@@ -18,7 +18,7 @@ public class Status {
     @Column(name = "status_id")
     private Long id;
 
-    @OneToMany(mappedBy = "status")
+    @OneToMany(mappedBy = "status", fetch = FetchType.EAGER)
     private List<F_Transaction> f_transactions;
 
     private String name;
