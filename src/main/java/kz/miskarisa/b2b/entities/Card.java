@@ -24,7 +24,7 @@ public class Card {
     private String cardMask;
     private String cardType;
     @JsonIgnore
-    private Long balance;
+    private float balance;
 
     @ManyToOne
     @JoinColumn(name = "company_id")

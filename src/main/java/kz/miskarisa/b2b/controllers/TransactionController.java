@@ -1,13 +1,9 @@
 package kz.miskarisa.b2b.controllers;
 
-import kz.miskarisa.b2b.entities.Company;
-import kz.miskarisa.b2b.entities.F_Transaction;
-import kz.miskarisa.b2b.entities.Status;
-import kz.miskarisa.b2b.repositories.CompanyRepository;
-import kz.miskarisa.b2b.repositories.F_TransactionRepository;
-import kz.miskarisa.b2b.repositories.L_TransactionRepository;
-import kz.miskarisa.b2b.repositories.StatusRepository;
+import kz.miskarisa.b2b.entities.*;
+import kz.miskarisa.b2b.repositories.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,11 +16,17 @@ public class TransactionController {
     private F_TransactionRepository f_transactionRepository;
     private CompanyRepository companyRepository;
     private StatusRepository statusRepository;
+    private ReasonRepository reasonRepository;
+    private CardRepository cardRepository;
+    private EmployeeRepository employeeRepository;
 
-    public TransactionController(F_TransactionRepository f_transactionRepository, CompanyRepository companyRepository, StatusRepository statusRepository) {
+    public TransactionController(F_TransactionRepository f_transactionRepository, CompanyRepository companyRepository, StatusRepository statusRepository, ReasonRepository reasonRepository, CardRepository cardRepository, EmployeeRepository employeeRepository) {
         this.f_transactionRepository = f_transactionRepository;
         this.companyRepository = companyRepository;
         this.statusRepository = statusRepository;
+        this.reasonRepository = reasonRepository;
+        this.cardRepository = cardRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     @GetMapping("/all")
@@ -181,6 +183,65 @@ public class TransactionController {
 
 
         return new MappingJacksonValue(listMap);
+    }
+
+
+    @PostMapping(value = "/newTransaction")
+    public void createTransaction(@RequestParam("description") String description,
+                                           @RequestParam("money") float money,
+                                           @RequestParam("employee_id") Long id,
+                                           @RequestParam("card_mask") String cardMask,
+                                           @RequestParam("ourCard") String ourCardMask){
+        F_Transaction transaction = new F_Transaction();
+        Employee employee = employeeRepository.getById(id);
+        Card cardPlusBalance = cardRepository.getCardByCardMask(cardMask);
+        Card cardMinusBalance = cardRepository.getCardByCardMask(ourCardMask);
+        if (cardMinusBalance.getBalance() > 0 || cardMinusBalance.getBalance() > money){
+            transaction.setMoney(money);
+            transaction.setDescription(description);
+            transaction.setCurrency("KZT");
+            transaction.setDateTime(LocalDate.now());
+            transaction.setReason(reasonRepository.getById(1L));
+            transaction.setStatus(statusRepository.getById(2L));
+            transaction.setCompanyId(employee.getCompany().getId());
+            transaction.setCompanyRecieverId(cardPlusBalance.getCompany().getId());
+
+            cardPlusBalance.setBalance(cardPlusBalance.getBalance() + money);
+            cardMinusBalance.setBalance(cardMinusBalance.getBalance() - money);
+            cardRepository.save(cardMinusBalance);
+            cardRepository.save(cardPlusBalance);
+            f_transactionRepository.save(transaction);
+
+        }
+
+    }
+
+    @CrossOrigin(origins = "http://192.168.0.110:4444")
+    @GetMapping("/getAllStatuses")
+    public MappingJacksonValue getAllTransactionStatuses(@RequestParam("start")
+                                                 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
+                                                 @RequestParam("end")
+                                                 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end) {
+
+        List<F_Transaction> transactions = f_transactionRepository.findAllByDateTimeBetween(start,end);
+        List<Map<String, Object>> newMap = new ArrayList<>();
+        for (F_Transaction f: transactions) {
+            Map<String, Object> arr = new HashMap<>();
+            arr.put("id", f.getId());
+            arr.put("dateTime", f.getDateTime());
+            arr.put("money", f.getMoney() + f.getCurrency());
+            if (f.getL_transaction() == null || f.getL_transaction() == null){
+                arr.put("sender", "Ruslan Mazhikenov");
+//                f.getL_transaction().getEmployee().setFirstName("Ruslan");
+//                f.getL_transaction().getEmployee().setLastName("Mazhikenov");
+            } else {
+                arr.put("sender", f.getL_transaction().getEmployee().getFirstName() + ' ' + f.getL_transaction().getEmployee().getLastName());
+            }
+            arr.put("status", f.getStatus());
+            newMap.add(arr);
+        }
+
+        return new MappingJacksonValue(newMap);
     }
 
 }

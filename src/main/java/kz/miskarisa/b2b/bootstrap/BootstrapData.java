@@ -98,7 +98,7 @@ public class BootstrapData implements CommandLineRunner {
 //        Reason reason = reasonRepository.getById(1L);
 //        Status status = statusRepository.getById(2L);
 //        F_Transaction f_transaction = new F_Transaction();
-//        f_transaction.setDescription("Sanya jivotnoe");
+//        f_transaction.setDescription("kek");
 //        f_transaction.setCurrency("KZT");
 //        f_transaction.setMoney(1000.53f);
 //        f_transaction.setDateTime(LocalDate.now());
