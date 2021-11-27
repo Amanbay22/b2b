@@ -23,10 +23,10 @@ public class Company {
     private String phone;
     private String address;
 
-    @OneToMany(mappedBy ="company", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy ="company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Card> card;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Employee> employees;
 
 }

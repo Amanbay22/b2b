@@ -1,11 +1,14 @@
 package kz.miskarisa.b2b.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="card")
@@ -24,8 +27,13 @@ public class Card {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonIgnore
     private Company company;
 
-    @OneToOne(mappedBy = "card")
-    private L_Transaction l_transactions;
+    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<L_Transaction> l_transactions;
+
+//    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
+//    private List<L_Transaction> l_transactions;
 }

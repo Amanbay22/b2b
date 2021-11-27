@@ -1,5 +1,6 @@
 package kz.miskarisa.b2b.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Reason {
     private Long id;
 
     @OneToMany(mappedBy = "reason", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<F_Transaction> f_transactions;
 
     private String description;

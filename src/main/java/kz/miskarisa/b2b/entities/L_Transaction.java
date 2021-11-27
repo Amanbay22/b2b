@@ -1,5 +1,6 @@
 package kz.miskarisa.b2b.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,14 +20,19 @@ public class L_Transaction {
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
+    @JsonIgnore
     private Employee employee;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="f_transaction_id")
+    @JsonIgnore
     private F_Transaction f_transaction;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "card_id")
     private Card card;
 
+//    @ManyToOne
+//    @JoinColumn(name = "card_id")
+//    private Card card;
 }
