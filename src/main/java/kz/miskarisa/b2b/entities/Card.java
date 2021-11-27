@@ -23,6 +23,7 @@ public class Card {
 
     private String cardMask;
     private String cardType;
+    @JsonIgnore
     private Long balance;
 
     @ManyToOne

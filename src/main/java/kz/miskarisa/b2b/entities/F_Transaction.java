@@ -32,4 +32,6 @@ public class F_Transaction {
 
     @OneToOne(mappedBy = "f_transaction", cascade = CascadeType.ALL)
     private L_Transaction l_transaction;
+
+    private Long companyId;
 }
