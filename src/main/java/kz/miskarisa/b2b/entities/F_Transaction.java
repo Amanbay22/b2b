@@ -16,6 +16,7 @@ public class F_Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="f_transaction_id")
     private Long id;
 
     private String description;
@@ -29,7 +30,6 @@ public class F_Transaction {
     @JoinColumn(name="status_id")
     private Status status;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="l_transaction_id")
+    @OneToOne(mappedBy = "f_transaction", cascade = CascadeType.ALL)
     private L_Transaction l_transaction;
 }
