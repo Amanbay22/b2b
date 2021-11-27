@@ -19,5 +19,6 @@ from . import views
 
 
 urlpatterns = [
-    path("testapicall", views.index),
+    path("sortByMonth", views.sortByMonth),
+    path("sortByDay", views.sortByDay),
 ]
