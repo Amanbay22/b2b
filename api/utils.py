@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas
 import base64
+from django.http import HttpResponse, JsonResponse
 
 
 def writeToDatabase(collection, data):
@@ -27,6 +28,22 @@ def toBinary(fileUrl):
 
 def getResponse(url):
     return requests.get(url).json()
+
+
+def getAllTransactions(request):
+    startPoint = request.GET['start']
+    endPoint = request.GET['end']
+    data = getResponse(
+        f"http://192.168.43.52:8080/transaction?start={startPoint}&end={endPoint}")
+    df = pandas.json_normalize(data)
+    plt.figure(figsize=(15, 7))
+    sns.histplot(data=df, x="dateTime",
+                 hue=df['status.name'], multiple="stack")
+    plt.xticks(rotation=45)
+    plt.savefig('histplot.png')
+    with open("histplot.png", 'rb') as f:
+        histString = base64.b64encode(f.read())
+    return histString
 
 
 def drawAndSavePieChart(uniqueValue, data):
