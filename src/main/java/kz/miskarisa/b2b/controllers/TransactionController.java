@@ -19,6 +19,7 @@ public class TransactionController {
     private ReasonRepository reasonRepository;
     private CardRepository cardRepository;
     private EmployeeRepository employeeRepository;
+    private L_TransactionRepository lTransactionRepository;
 
     public TransactionController(F_TransactionRepository f_transactionRepository, CompanyRepository companyRepository, StatusRepository statusRepository, ReasonRepository reasonRepository, CardRepository cardRepository, EmployeeRepository employeeRepository) {
         this.f_transactionRepository = f_transactionRepository;
@@ -216,7 +217,7 @@ public class TransactionController {
 
     }
 
-    @CrossOrigin(origins = "http://192.168.0.110:4444")
+    @CrossOrigin(origins = "http://192.168.0.110:4445")
     @GetMapping("/getAllStatuses")
     public MappingJacksonValue getAllTransactionStatuses(@RequestParam("start")
                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
@@ -238,6 +239,34 @@ public class TransactionController {
                 arr.put("sender", f.getL_transaction().getEmployee().getFirstName() + ' ' + f.getL_transaction().getEmployee().getLastName());
             }
             arr.put("status", f.getStatus());
+            newMap.add(arr);
+        }
+
+        return new MappingJacksonValue(newMap);
+    }
+
+    @GetMapping("/lastTransaction")
+    public MappingJacksonValue getLastTransactions(){
+        List<F_Transaction> transactions = f_transactionRepository.findAll();
+        List<Map<String, Object>> newMap = new ArrayList<>();
+
+
+        for (F_Transaction t: transactions) {
+            Map<String, Object> arr = new HashMap<>();
+            Company company = companyRepository.findDistinctById(t.getCompanyRecieverId());
+            System.out.println(company.getName());
+//            HashMap<String, String> hashMap = new HashMap<>();
+//            hashMap.put(company.getName(), company.getName());
+
+            arr.put("companyName", company.getName());
+            arr.put("amountOfTransactions", transactions.size());
+            List<F_Transaction> amountOfSuccess = f_transactionRepository.findAllByStatus(statusRepository.getById(1L));
+            float sum = 0;
+            for (F_Transaction transaction : transactions){
+                sum += transaction.getMoney();
+            }
+            arr.put("money", sum);
+            arr.put("conversion", (amountOfSuccess.size()*100.0f)/sum);
             newMap.add(arr);
         }
 

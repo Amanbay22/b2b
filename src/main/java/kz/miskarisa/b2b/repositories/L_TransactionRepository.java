@@ -5,6 +5,8 @@ import kz.miskarisa.b2b.entities.L_Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface L_TransactionRepository extends JpaRepository<L_Transaction, Long> {
 }
